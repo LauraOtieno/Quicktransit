@@ -1,0 +1,106 @@
+<div style="display: flex; align-items: center; justify-content: center; height: 100vh; background-color: #f8f9fa;">
+  <div style="
+      max-width: 400px;
+      width: 100%;
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    ">
+    <h5 style="
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        color: #333;
+      ">
+      Confirm &amp; Pay
+    </h5>
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <p style="margin: 0; font-weight: 600; color: #555;">
+          {{ trip.origin }} → {{ trip.destination }}
+        </p>
+        <small style="color: #888;">
+          {{ trip.departure_time|date:"M d, Y H:i" }}
+        </small>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <span style="font-size: 1.25rem; font-weight: 600; color: #28a745;">
+          KSH {{ trip.price }}
+        </span>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <label for="seat_number" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">
+          Select Seat
+        </label>
+        <select
+          name="seat_number"
+          id="seat_number"
+          required
+          style="
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #333;
+          "
+        >
+          <option value="" disabled selected>Select a seat</option>
+          {% for seat in available_seats %}
+            <option value="{{ seat }}">{{ seat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label for="paymentMethod" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: #333;">
+          Payment Method
+        </label>
+        <select
+          id="paymentMethod"
+          name="payment_method"
+          required
+          style="
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #333;
+          "
+        >
+          <option value="" disabled selected>Choose method</option>
+          <option value="card">Card</option>
+          <option value="mpesa">M-Pesa</option>
+          <option value="cash">Cash</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        style="
+          width: 100%;
+          padding: 0.75rem;
+          background: linear-gradient(45deg, #28a745, #20c997);
+          border: none;
+          border-radius: 2rem;
+          font-size: 1rem;
+          font-weight: 700;
+          color: #fff;
+          cursor: pointer;
+          transition: opacity 0.3s ease;
+        "
+        onmouseover="this.style.opacity=0.9"
+        onmouseout="this.style.opacity=1"
+      >
+        Pay Now
+      </button>
+    </form>
+  </div>
+</div>

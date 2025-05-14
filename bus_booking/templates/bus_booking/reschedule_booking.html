@@ -1,0 +1,22 @@
+<h2 style="text-align: center; color: #333; font-family: 'Arial', sans-serif; margin-top: 20px;">Reschedule Booking</h2>
+
+<p style="text-align: center; font-size: 16px; color: #555; font-family: 'Arial', sans-serif; margin-top: 10px;">Current Trip: {{ booking.trip }}</p>
+
+<form method="post" style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    {% csrf_token %}
+    
+    <div style="margin-bottom: 15px;">
+        <label for="new_trip" style="font-size: 14px; color: #555; display: block; margin-bottom: 5px; font-family: 'Arial', sans-serif;">Select New Trip:</label>
+        <select name="new_trip" id="new_trip" required style="width: 100%; padding: 8px; font-size: 14px; color: #333; border: 1px solid #ccc; border-radius: 4px;">
+            {% for trip in available_trips %}
+                <option value="{{ trip.id }}">{{ trip.origin }} to {{ trip.destination }} ({{ trip.departure_time }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; transition: background-color 0.3s;">
+            Reschedule
+        </button>
+    </div>
+</form>

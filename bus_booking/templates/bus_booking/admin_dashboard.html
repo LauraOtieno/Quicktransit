@@ -1,0 +1,52 @@
+{% extends "bus_booking/base.html" %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+ 
+<h2>Customer Bookings</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Trip</th>
+            <th>Status</th>
+            <th>Loyalty Points</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.customer.username }}</td>
+            <td>{{ booking.trip }}</td>
+            <td>{{ booking.status }}</td>
+            <td>{{ booking.loyalty_points }}</td>
+            <td>
+                <a href="{% url 'generate_receipt' booking.id %}" class="btn btn-sm btn-secondary">Generate Receipt</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+ 
+<h3>Manage Buses</h3>
+{% if buses %}
+    <div class="bus-list">
+        {% for bus in buses %}
+        <div class="bus-item">
+            <h4>{{ bus.bus }}</h4>
+            <p>Origin: {{ bus.origin }} | Destination: {{ bus.destination }} | Departure: {{ bus.departure_time }} | Price: ${{ bus.price }}</p>
+            <a href="{% url 'update_bus' bus.id %}" class="btn btn-sm btn-primary">Edit Bus</a>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No buses available to manage.</p>
+{% endif %}
+
+
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "bus_booking/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow border-0 rounded p-4">
+        
+        <div class="card-header bg-primary text-white text-center fw-bold">
+          Register
+        </div>
+        <div class="card-body">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+          <form method="POST" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+              <div class="mb-3">
+                {{ field }}
+                {% if field.errors %}
+                  <div class="text-danger small">
+                    {{ field.errors|striptags }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+          </form>
+          <p class="text-center mt-3">
+            Already have an account?
+            <a href="{% url 'login' %}" class="text-decoration-none text-primary fw-bold">Log in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+<style>
+  .card {
+    border-radius: 12px;
+    background: #fff;
+  }
+</style>
+{% endblock %}

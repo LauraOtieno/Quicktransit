@@ -1,0 +1,15 @@
+ 
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>Update Bus Information</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Bus</button>
+  </form>
+
+  <br>
+  <a href="{% url 'admin_dashboard' %}">Back to Admin Dashboard</a>
+{% endblock %}
