@@ -29,6 +29,6 @@ Backend: Python (Django)
 
 Frontend: HTML, CSS
 
-Database: SQLite / MySQL
+Database: postgre SQL
 
 Version Control: Git & GitHub
